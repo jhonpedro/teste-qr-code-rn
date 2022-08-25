@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>QR Code</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+		<style>
+			body, html {
+				margin: 0;
+				padding: 0;
+				max-width: 256px;
+				width: 256px;
+				height: 256px;
+			}
+		</style>
+	</head>
+	<body >
+		<div id="qrcode"></div>
+	</body>
+	<script>
+		try {
+			const randomPerson = Math.ceil(Math.random() * 79) + 1
+
+			let qrcode = new QRCode(document.getElementById('qrcode'), {
+				text: `https://swapi.dev/api/people/${randomPerson}`,
+			})
+		} catch (err) {
+			console.error(err)
+		}
+	</script>
+</html>
