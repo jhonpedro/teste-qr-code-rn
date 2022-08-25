@@ -2,9 +2,9 @@
 <html lang="en">
 	<head>
 		<title>QR Code</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 		<style>
-			body, html {
+			body,
+			html {
 				margin: 0;
 				padding: 0;
 				max-width: 256px;
@@ -13,18 +13,24 @@
 			}
 		</style>
 	</head>
-	<body >
+	<body>
 		<div id="qrcode"></div>
+		<video autoplay id="video"></video>
 	</body>
 	<script>
-		try {
-			const randomPerson = Math.ceil(Math.random() * 79) + 1
+		async function main() {
+			if (
+				'mediaDevices' in navigator &&
+				'getUserMedia' in navigator.mediaDevices
+			) {
+				console.log('teste')
+				const videoStream = await navigator.mediaDevices.getUserMedia({ video: true})
 
-			let qrcode = new QRCode(document.getElementById('qrcode'), {
-				text: `https://swapi.dev/api/people/${randomPerson}`,
-			})
-		} catch (err) {
-			console.error(err)
+				const video = document.querySelector('#video')
+				video.srcObject = videoStream
+			}
 		}
+
+    main()
 	</script>
 </html>
