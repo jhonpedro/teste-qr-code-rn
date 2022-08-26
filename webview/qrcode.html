@@ -19,13 +19,15 @@
 	</head>
 	<body>
 		<div id="qrcode"></div>
-		<video autoplay id="video"></video>
+    <span>String: <strong class="qrcode"></strong></span>
 	</body>
 	<script>
 		async function main() {
 			function onScanSuccess(decodedText, decodedResult) {
 				// handle the scanned code as you like, for example:
 				console.log(`Code matched = ${decodedText}`, decodedResult)
+        document.querySelector('.qrcode').innerHTML = decodedText
+        html5QrcodeScanner.stop()
 			}
 
 			function onScanFailure(error) {
@@ -35,9 +37,9 @@
 			}
 
 			let html5QrcodeScanner = new Html5QrcodeScanner(
-				'reader',
+				'qrcode',
 				{ fps: 10, qrbox: { width: 250, height: 250 } },
-				/* verbose= */ true
+				/* verbose= */ false
 			)
 			html5QrcodeScanner.render(onScanSuccess, onScanFailure)
 		}
