@@ -24,7 +24,15 @@
 				'getUserMedia' in navigator.mediaDevices
 			) {
 				console.log('teste')
-				const videoStream = await navigator.mediaDevices.getUserMedia({ video: true})
+				const videoStream = await navigator.mediaDevices.getUserMedia({ video: {
+          width: {
+            min: 200
+          },
+          height: {
+            min: 200
+          },
+          facingMode: 'environment'
+        }})
 
 				const video = document.querySelector('#video')
 				video.srcObject = videoStream
